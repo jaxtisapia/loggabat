@@ -1,7 +1,7 @@
 const {expect} = require("chai");
 const {describe} = require("mocha");
 
-const LoggaHistory = require("../logga/history");
+const LoggaHistory = require("../src/logga/history");
 
 describe("LoggaHistory", () => {
 

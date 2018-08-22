@@ -1,35 +1,35 @@
+/* eslint-disable no-underscore-dangle */
 class LoggaHistory {
+  // const MAX_SIZE = 5;
 
-    // const MAX_SIZE = 5;
-
-    /**
+  /**
      * @constructor
      */
-    constructor(){
-        this._queue = [];
-    };
+  constructor() {
+    this._queue = [];
+  }
 
-    /**
+  /**
      *
      * @param content
      */
-    push(content){
-        this._queue.push(content)
-    };
+  push(content) {
+    this._queue.push(content);
+  }
 
-    /**
+  /**
      *
      */
-    empty(){
-        this._queue = [];
-    }
+  empty() {
+    this._queue = [];
+  }
 
-    /**
+  /**
      * @return {Array}
      */
-    getQueue() {
-        return this._queue;
-    }
+  getQueue() {
+    return this._queue;
+  }
 }
 
 module.exports = LoggaHistory;

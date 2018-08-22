@@ -1,8 +1,8 @@
 const {describe} = require("mocha");
 const {expect, should} = require("chai");
 
-const Logga = require('../logga');
-const LoggaType = require('../logga/type');
+const Logga = require('../src/logga/logga');
+const LoggaType = require('../src/logga/type');
 
 describe("Logga", () => {
 

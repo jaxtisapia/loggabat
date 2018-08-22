@@ -1,6 +1,6 @@
 module.exports = {
-  INFO: "info",
-  WARN: "warn",
-  ERROR: "error",
-  LOG: "log",
+  INFO: 'info',
+  WARN: 'warn',
+  ERROR: 'error',
+  LOG: 'log',
 };

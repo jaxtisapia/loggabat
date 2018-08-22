@@ -103,7 +103,9 @@ class Logga {
    * @return {LoggedContent} Details of log action
    */
   _log(loggerFunction, { message, isTestModeMessage }, type = LoggaType.INFO) {
-    const loggedContent = new LoggedContent({ logged: false, message, type });
+    let contentMessage = message;
+
+    const loggedContent = new LoggedContent({ logged: false, message: contentMessage, type });
     const loggaHistory = this._history;
 
     // Filters all relevant log actions according to 'productionMode' of Logga Instance
@@ -111,8 +113,7 @@ class Logga {
 
     // Hooray!!! You made it to this space
     // At this point, all log functions are RAN SUCCESSFULLY
-    let contentMessage = '';
-    if (this.isPrefixSet()) contentMessage = this._prependPrefixToMessage(message);
+    if (this.isPrefixSet()) contentMessage = this._prependPrefixToMessage(contentMessage);
 
     loggaHistory.push(contentMessage);
     loggerFunction(contentMessage);
