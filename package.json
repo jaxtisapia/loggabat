@@ -1,5 +1,5 @@
 {
-  "name": "logga",
+  "name": "loggah",
   "version": "1.0.0",
   "description": "Special Logger for filtering logs you need in production, and logs you need in test mode only",
   "main": "./lib/index.js",
@@ -25,7 +25,8 @@
     "url": "git+https://github.com/jaxtisapia/logga.git"
   },
   "keywords": [
-    "boilerplate",
+    "log",
+    "history",
     "npm",
     "module",
     "node",
