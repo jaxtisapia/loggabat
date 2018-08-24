@@ -12,7 +12,7 @@ const loggabat = new Loggabat({
     productionMode: process.env.NODE_ENV
 });
 
-logbat.warn("First goblin on the ground!!");
+loggabat.warn("First goblin on the ground!!");
 
 ```
 
@@ -26,7 +26,7 @@ logbat.warn("First goblin on the ground!!");
 
 ### Installation
 
-Logbat requires [Node.js](https://nodejs.org/) to run.
+Loggabat requires [JS] to run.
 
 Install the dependency via npm
 
@@ -37,7 +37,7 @@ npm install --save loggabat
 ### Importing
 
 ```sh
-// Using Node.js `require()`
+// Using Node.js - require()
 const Loggabat = require('loggabat');
 
 // Using ES6 imports
@@ -84,14 +84,14 @@ const loggabat = new Loggabat({
 
 loggabat.info("I am confirmed"); // {nothing happens}
 
-logbat.prod().info("I am confirmed"); // My app name space: I am confirmed
-logbat.production().info("I am confirmed"); // My app name space: I am confirmed
+loggabat.prod().info("I am confirmed"); // My app name space: I am confirmed
+loggabat.production().info("I am confirmed"); // My app name space: I am confirmed
 
-logbat.setTestEnvironment(); // In test environment now
+loggabat.setTestEnvironment(); // In test environment now
 
-logbat.info("I am confirmed"); // My app name space: I am confirmed
-logbat.prod().info("I am confirmed"); // My app name space: I am confirmed
-logbat.production().info("I am confirmed"); // My app name space: I am confirmed
+loggabat.info("I am confirmed"); // My app name space: I am confirmed
+loggabat.prod().info("I am confirmed"); // My app name space: I am confirmed
+loggabat.production().info("I am confirmed"); // My app name space: I am confirmed
 ```
 
 `All messages you need in production should be preceeded 
