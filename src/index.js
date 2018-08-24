@@ -1,3 +1,3 @@
-const Logga = require('./logga/logga');
+const LoggaBat = require('./loggabat/logga');
 
-module.exports = Logga;
+module.exports = LoggaBat;

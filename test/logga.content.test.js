@@ -1,34 +1,34 @@
 const {expect} = require("chai");
 const {describe} = require("mocha");
 
-const LoggaContent = require("../src/logga/content");
-const LoggaType = require("../src/logga/type");
+const LoggaBatContent = require("../src/loggabat/content");
+const LoggaBatType = require("../src/loggabat/type");
 
-describe("LoggaContent", () => {
+describe("LoggaBatContent", () => {
 
-    let loggaContent;
-    let loggaContentInitializedWithTypeOnly;
-    let loggaContentInitializedWithWrongTypeOnly;
-    let loggaContentInitializedWithMessageOnly;
-    let loggaContentInitializedWithLoggedStatusOnly;
-    let loggaContentInitializedWithAllParameters;
+    let loggedContent;
+    let loggabatContentInitializedWithTypeOnly;
+    let loggabatContentInitializedWithWrongTypeOnly;
+    let loggabatContentInitializedWithMessageOnly;
+    let loggabatContentInitializedWithLoggedStatusOnly;
+    let loggabatContentInitializedWithAllParameters;
 
-    const DEFAULT_TYPE = LoggaType.LOG;
+    const DEFAULT_TYPE = LoggaBatType.LOG;
     const DEFAULT_MESSAGE = null;
     const DEFAULT_LOGGED_STATUS = false;
 
-    const SAMPLE_LOGGA_WRONG_TYPE = "WRONG_TYPE";
-    const SAMPLE_LOGGA_MESSAGE = "Hello Moto!";
-    const SAMPLE_LOGGA_LOGGED_STATUS = true;
+    const SAMPLE_LOGGABAT_WRONG_TYPE = "WRONG_TYPE";
+    const SAMPLE_LOGGABAT_MESSAGE = "Hello Moto!";
+    const SAMPLE_LOGGABAT_LOGGED_STATUS = true;
 
     beforeEach(() => {
 
-        loggaContent = new LoggaContent({});
-        loggaContentInitializedWithTypeOnly = new LoggaContent({ type: LoggaType.WARN });
-        loggaContentInitializedWithWrongTypeOnly = new LoggaContent({ type: SAMPLE_LOGGA_WRONG_TYPE });
-        loggaContentInitializedWithMessageOnly = new LoggaContent({ message: SAMPLE_LOGGA_MESSAGE });
-        loggaContentInitializedWithLoggedStatusOnly = new LoggaContent({ logged: true });
-        loggaContentInitializedWithAllParameters = new LoggaContent({ type: LoggaType.WARN, message: SAMPLE_LOGGA_MESSAGE, logged: SAMPLE_LOGGA_LOGGED_STATUS });
+        loggedContent = new LoggaBatContent({});
+        loggabatContentInitializedWithTypeOnly = new LoggaBatContent({ type: LoggaBatType.WARN });
+        loggabatContentInitializedWithWrongTypeOnly = new LoggaBatContent({ type: SAMPLE_LOGGABAT_WRONG_TYPE });
+        loggabatContentInitializedWithMessageOnly = new LoggaBatContent({ message: SAMPLE_LOGGABAT_MESSAGE });
+        loggabatContentInitializedWithLoggedStatusOnly = new LoggaBatContent({ logged: true });
+        loggabatContentInitializedWithAllParameters = new LoggaBatContent({ type: LoggaBatType.WARN, message: SAMPLE_LOGGABAT_MESSAGE, logged: SAMPLE_LOGGABAT_LOGGED_STATUS });
 
     });
 
@@ -36,41 +36,41 @@ describe("LoggaContent", () => {
 
         it('should initialise with no arguments set', () => {
 
-            expect(loggaContent.type).to.equal(DEFAULT_TYPE);
-            expect(loggaContent.message).to.equal(DEFAULT_MESSAGE);
-            expect(loggaContent.logged).to.equal(DEFAULT_LOGGED_STATUS);
+            expect(loggedContent.type).to.equal(DEFAULT_TYPE);
+            expect(loggedContent.message).to.equal(DEFAULT_MESSAGE);
+            expect(loggedContent.logged).to.equal(DEFAULT_LOGGED_STATUS);
 
         });
 
         it('should initialise with only -type- argument set', () => {
 
-            expect(loggaContentInitializedWithTypeOnly.type).to.equal(LoggaType.WARN);
-            expect(loggaContentInitializedWithTypeOnly.message).to.equal(DEFAULT_MESSAGE);
-            expect(loggaContentInitializedWithTypeOnly.logged).to.equal(DEFAULT_LOGGED_STATUS);
+            expect(loggabatContentInitializedWithTypeOnly.type).to.equal(LoggaBatType.WARN);
+            expect(loggabatContentInitializedWithTypeOnly.message).to.equal(DEFAULT_MESSAGE);
+            expect(loggabatContentInitializedWithTypeOnly.logged).to.equal(DEFAULT_LOGGED_STATUS);
 
         });
 
         it('should initialise with only WRONG -type- argument set', () => {
 
-            expect(loggaContentInitializedWithWrongTypeOnly.type).to.equal(DEFAULT_TYPE);
-            expect(loggaContentInitializedWithWrongTypeOnly.message).to.equal(DEFAULT_MESSAGE);
-            expect(loggaContentInitializedWithWrongTypeOnly.logged).to.equal(DEFAULT_LOGGED_STATUS);
+            expect(loggabatContentInitializedWithWrongTypeOnly.type).to.equal(DEFAULT_TYPE);
+            expect(loggabatContentInitializedWithWrongTypeOnly.message).to.equal(DEFAULT_MESSAGE);
+            expect(loggabatContentInitializedWithWrongTypeOnly.logged).to.equal(DEFAULT_LOGGED_STATUS);
 
         });
 
         it('should initialise with only -message- argument set', () => {
 
-            expect(loggaContentInitializedWithMessageOnly.type).to.equal(DEFAULT_TYPE);
-            expect(loggaContentInitializedWithMessageOnly.message).to.equal(SAMPLE_LOGGA_MESSAGE);
-            expect(loggaContentInitializedWithMessageOnly.logged).to.equal(DEFAULT_LOGGED_STATUS);
+            expect(loggabatContentInitializedWithMessageOnly.type).to.equal(DEFAULT_TYPE);
+            expect(loggabatContentInitializedWithMessageOnly.message).to.equal(SAMPLE_LOGGABAT_MESSAGE);
+            expect(loggabatContentInitializedWithMessageOnly.logged).to.equal(DEFAULT_LOGGED_STATUS);
 
         });
 
         it('should initialise with only -logged- argument set', () => {
 
-            expect(loggaContentInitializedWithLoggedStatusOnly.type).to.equal(DEFAULT_TYPE);
-            expect(loggaContentInitializedWithLoggedStatusOnly.message).to.equal(DEFAULT_MESSAGE);
-            expect(loggaContentInitializedWithLoggedStatusOnly.logged).to.equal(SAMPLE_LOGGA_LOGGED_STATUS);
+            expect(loggabatContentInitializedWithLoggedStatusOnly.type).to.equal(DEFAULT_TYPE);
+            expect(loggabatContentInitializedWithLoggedStatusOnly.message).to.equal(DEFAULT_MESSAGE);
+            expect(loggabatContentInitializedWithLoggedStatusOnly.logged).to.equal(SAMPLE_LOGGABAT_LOGGED_STATUS);
 
         })
 
@@ -80,10 +80,10 @@ describe("LoggaContent", () => {
 
         it('should indicate that a log has successfully be executed', () => {
 
-            expect(loggaContent.logged).to.equal(false);
+            expect(loggedContent.logged).to.equal(false);
 
-            loggaContent.setSuccessful();
-            expect(loggaContent.logged).to.not.equal(false);
+            loggedContent.setSuccessful();
+            expect(loggedContent.logged).to.not.equal(false);
         })
 
     });

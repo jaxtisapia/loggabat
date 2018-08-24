@@ -1,34 +1,34 @@
 const {expect} = require("chai");
 const {describe} = require("mocha");
 
-const LoggahHistory = require("../src/logga/history");
+const LoggaBatHistory = require("../src/loggabat/history");
 
-describe("LoggahHistory", () => {
+describe("LoggaBatHistory", () => {
 
-    let loggahHistory;
-    let loggahHistoryInitiatedWithUnnecessaryArgument;
+    let loggabatHistory;
+    let loggabatHistoryInitiatedWithUnnecessaryArgument;
 
     const FIRST_MESSAGE = "first message";
     const SECOND_MESSAGE = "second message";
     const THIRD_MESSAGE = "third message";
 
     beforeEach(() => {
-        loggahHistory  = new LoggahHistory();
-        loggahHistoryInitiatedWithUnnecessaryArgument  = new LoggahHistory("someString");
+        loggabatHistory  = new LoggaBatHistory();
+        loggabatHistoryInitiatedWithUnnecessaryArgument  = new LoggaBatHistory("someString");
 
     });
 
     describe("#constructor", () => {
 
-        it('should create an instance of LoggahHistory', () => {
+        it('should create an instance of LoggaBatHistory', () => {
 
-            expect(loggahHistory).to.be.an('object');
-            expect(loggahHistory.getQueue()).to.be.an("array");
-            expect(loggahHistory.getQueue()).to.have.length(0);
+            expect(loggabatHistory).to.be.an('object');
+            expect(loggabatHistory.getQueue()).to.be.an("array");
+            expect(loggabatHistory.getQueue()).to.have.length(0);
 
-            expect(loggahHistoryInitiatedWithUnnecessaryArgument).to.be.an('object');
-            expect(loggahHistoryInitiatedWithUnnecessaryArgument.getQueue()).to.be.an("array");
-            expect(loggahHistoryInitiatedWithUnnecessaryArgument.getQueue()).to.have.length(0);
+            expect(loggabatHistoryInitiatedWithUnnecessaryArgument).to.be.an('object');
+            expect(loggabatHistoryInitiatedWithUnnecessaryArgument.getQueue()).to.be.an("array");
+            expect(loggabatHistoryInitiatedWithUnnecessaryArgument.getQueue()).to.have.length(0);
         });
 
     });
@@ -37,14 +37,14 @@ describe("LoggahHistory", () => {
 
         it('should be able to add more than one items (strings) to the Queue', () => {
 
-            loggahHistory.push(FIRST_MESSAGE);
-            expect(loggahHistory.getQueue()).to.have.length(1);
+            loggabatHistory.push(FIRST_MESSAGE);
+            expect(loggabatHistory.getQueue()).to.have.length(1);
 
-            loggahHistory.push(SECOND_MESSAGE);
-            expect(loggahHistory.getQueue()).to.have.length(2);
+            loggabatHistory.push(SECOND_MESSAGE);
+            expect(loggabatHistory.getQueue()).to.have.length(2);
 
-            loggahHistory.push(THIRD_MESSAGE);
-            expect(loggahHistory.getQueue()).to.have.length(3);
+            loggabatHistory.push(THIRD_MESSAGE);
+            expect(loggabatHistory.getQueue()).to.have.length(3);
 
         });
 
@@ -53,22 +53,22 @@ describe("LoggahHistory", () => {
     describe("#empty", () => {
         it('should clear the history Queue', () => {
 
-            loggahHistory.push(FIRST_MESSAGE);
-            expect(loggahHistory.getQueue()).to.have.length(1);
+            loggabatHistory.push(FIRST_MESSAGE);
+            expect(loggabatHistory.getQueue()).to.have.length(1);
 
-            loggahHistory.empty();
-            expect(loggahHistory.getQueue()).to.have.length(0);
+            loggabatHistory.empty();
+            expect(loggabatHistory.getQueue()).to.have.length(0);
         })
     });
 
     describe("#getQueue", () => {
         it('should return an array of all items ever logged', () => {
 
-            loggahHistory.push(FIRST_MESSAGE);
-            loggahHistory.push(SECOND_MESSAGE);
-            loggahHistory.push(THIRD_MESSAGE);
+            loggabatHistory.push(FIRST_MESSAGE);
+            loggabatHistory.push(SECOND_MESSAGE);
+            loggabatHistory.push(THIRD_MESSAGE);
 
-            expect(loggahHistory.getQueue()).to.have.length(3);
+            expect(loggabatHistory.getQueue()).to.have.length(3);
         })
     });
 

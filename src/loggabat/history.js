@@ -3,9 +3,9 @@
 /**
  * History Collector for all contents logged onto the console
  */
-class LoggahHistory {
+class LoggaBatHistory {
   /**
-   * Create a new LoggahHistory instance
+   * Create a new LoggaBatHistory instance
    * @constructor
    */
   constructor() {
@@ -28,7 +28,7 @@ class LoggahHistory {
   }
 
   /**
-   * Get all LoggedContents successfuly logged into console
+   * Get all LoggedContents successfully logged into console
    * @return {Array}
    */
   getQueue() {
@@ -36,4 +36,4 @@ class LoggahHistory {
   }
 }
 
-module.exports = LoggahHistory;
+module.exports = LoggaBatHistory;

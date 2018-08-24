@@ -1,63 +1,63 @@
 const {describe} = require("mocha");
 const {expect, should} = require("chai");
 
-const Logga = require('../src/logga/logga');
-const LoggaType = require('../src/logga/type');
+const LoggaBat = require('../src/loggabat/logga');
+const LoggaBatType = require('../src/loggabat/type');
 
-describe("Logga", () => {
+describe("LoggaBat", () => {
 
-    let logga;
+    let loggabat;
 
-    let loggaInitialisedWithProductionMode;
-    let loggaInitialisedWithTestMode;
-    let loggaInitialisedWithStringPrefix;
-    let loggaInitialisedWithNumberPrefix;
+    let loggabatInitialisedWithProductionMode;
+    let loggabatInitialisedWithTestMode;
+    let loggabatInitialisedWithStringPrefix;
+    let loggabatInitialisedWithNumberPrefix;
 
-    let loggaInitialisedWithString;
-    let loggaInitialisedWithNumber;
-    let loggaInitialisedWithFunction;
+    let loggabatInitialisedWithString;
+    let loggabatInitialisedWithNumber;
+    let loggabatInitialisedWithFunction;
 
     const MY_APP_PREFIX_STRING = "This is my new app:";
     const MY_APP_PREFIX_NUMBER = 234;
 
     beforeEach(() => {
-        logga = new Logga({});
+        loggabat = new LoggaBat({});
 
-        loggaInitialisedWithProductionMode = new Logga({ productionMode: true });
-        loggaInitialisedWithTestMode = new Logga({ productionMode: false });
+        loggabatInitialisedWithProductionMode = new LoggaBat({ productionMode: true });
+        loggabatInitialisedWithTestMode = new LoggaBat({ productionMode: false });
 
-        loggaInitialisedWithStringPrefix = new Logga({ prefix: MY_APP_PREFIX_STRING });
-        loggaInitialisedWithNumberPrefix = new Logga({ prefix: MY_APP_PREFIX_NUMBER });
+        loggabatInitialisedWithStringPrefix = new LoggaBat({ prefix: MY_APP_PREFIX_STRING });
+        loggabatInitialisedWithNumberPrefix = new LoggaBat({ prefix: MY_APP_PREFIX_NUMBER });
 
-        loggaInitialisedWithString = new Logga({ productionMode: "string" });
-        loggaInitialisedWithNumber = new Logga({ productionMode: "number" });
-        loggaInitialisedWithFunction = new Logga({ productionMode: () => "hello there!" });
+        loggabatInitialisedWithString = new LoggaBat({ productionMode: "string" });
+        loggabatInitialisedWithNumber = new LoggaBat({ productionMode: "number" });
+        loggabatInitialisedWithFunction = new LoggaBat({ productionMode: () => "hello there!" });
     });
 
     describe("#constructor", () => {
 
-        it('should create a new Logga instance - without arguments', () => {
+        it('should create a new LoggaBat instance - without arguments', () => {
 
-            const productionMode = logga.productionMode();
+            const productionMode = loggabat.productionMode();
 
             expect(productionMode).to.be.a("boolean");
             expect(productionMode).to.equal(false);
         });
 
-        it('should create a new Logga instance with all expected true arguments set', () => {
+        it('should create a new LoggaBat instance with all expected true arguments set', () => {
 
-            expect(loggaInitialisedWithProductionMode.productionMode()).to.equal(true);
-            expect(loggaInitialisedWithTestMode.productionMode()).to.equal(false);
+            expect(loggabatInitialisedWithProductionMode.productionMode()).to.equal(true);
+            expect(loggabatInitialisedWithTestMode.productionMode()).to.equal(false);
 
-            expect(loggaInitialisedWithStringPrefix.prefix()).to.equal(MY_APP_PREFIX_STRING);
-            expect(loggaInitialisedWithNumberPrefix.prefix()).to.equal(MY_APP_PREFIX_NUMBER);
+            expect(loggabatInitialisedWithStringPrefix.prefix()).to.equal(MY_APP_PREFIX_STRING);
+            expect(loggabatInitialisedWithNumberPrefix.prefix()).to.equal(MY_APP_PREFIX_NUMBER);
 
         });
 
-        it('should create a new Logga instance with all unexpected arguments set - Constructor Mismatching', () => {
-            expect(loggaInitialisedWithString.productionMode()).equal(false);
-            expect(loggaInitialisedWithNumber.productionMode()).equal(false);
-            expect(loggaInitialisedWithFunction.productionMode()).equal(false);
+        it('should create a new LoggaBat instance with all unexpected arguments set - Constructor Mismatching', () => {
+            expect(loggabatInitialisedWithString.productionMode()).equal(false);
+            expect(loggabatInitialisedWithNumber.productionMode()).equal(false);
+            expect(loggabatInitialisedWithFunction.productionMode()).equal(false);
         });
 
     });
@@ -66,10 +66,10 @@ describe("Logga", () => {
 
         it('should set production mode to true', () => {
 
-            const initialProductionMode = logga.productionMode();
+            const initialProductionMode = loggabat.productionMode();
 
-            logga.setProductionEnvironment();
-            const finalProductionMode = logga.productionMode();
+            loggabat.setProductionEnvironment();
+            const finalProductionMode = loggabat.productionMode();
 
             expect(initialProductionMode).to.equal(false);
             expect(finalProductionMode).to.equal(true);
@@ -81,10 +81,10 @@ describe("Logga", () => {
 
         it('#setTestEnvironemnt should set production mode to true', () => {
 
-            const initialProductionMode = loggaInitialisedWithProductionMode.productionMode();
+            const initialProductionMode = loggabatInitialisedWithProductionMode.productionMode();
 
-            loggaInitialisedWithProductionMode.setTestEnvironment();
-            const finalProductionMode = loggaInitialisedWithProductionMode.productionMode();
+            loggabatInitialisedWithProductionMode.setTestEnvironment();
+            const finalProductionMode = loggabatInitialisedWithProductionMode.productionMode();
 
             expect(initialProductionMode).to.equal(true);
             expect(finalProductionMode).to.equal(false);
@@ -99,118 +99,118 @@ describe("Logga", () => {
         const LOG = "I am logged";
         const ERROR = "I am errored, Yikes!";
 
-        it('should LOG when Logga in testEnvironment, and pre-production function called', () => {
+        it('should LOG when LoggaBat in testEnvironment, and pre-production function called', () => {
 
-            const resultWithWarn = loggaInitialisedWithTestMode.prod().warn(WARNING);
-            const resultWithInfo = loggaInitialisedWithTestMode.prod().info(INFO);
-            const resultWithLog = loggaInitialisedWithTestMode.prod().log(LOG);
-            const resultWithError = loggaInitialisedWithTestMode.prod().error(ERROR);
+            const resultWithWarn = loggabatInitialisedWithTestMode.prod().warn(WARNING);
+            const resultWithInfo = loggabatInitialisedWithTestMode.prod().info(INFO);
+            const resultWithLog = loggabatInitialisedWithTestMode.prod().log(LOG);
+            const resultWithError = loggabatInitialisedWithTestMode.prod().error(ERROR);
 
             expect(resultWithWarn.logged).to.equal(true);
-            expect(resultWithWarn.type).to.equal(LoggaType.WARN);
+            expect(resultWithWarn.type).to.equal(LoggaBatType.WARN);
 
             expect(resultWithInfo.logged).to.equal(true);
-            expect(resultWithInfo.type).to.equal(LoggaType.INFO);
+            expect(resultWithInfo.type).to.equal(LoggaBatType.INFO);
 
             expect(resultWithLog.logged).to.equal(true);
-            expect(resultWithLog.type).to.equal(LoggaType.LOG);
+            expect(resultWithLog.type).to.equal(LoggaBatType.LOG);
 
             expect(resultWithError.logged).to.equal(true);
-            expect(resultWithError.type).to.equal(LoggaType.ERROR);
+            expect(resultWithError.type).to.equal(LoggaBatType.ERROR);
 
         });
 
-        it('should LOG when Logga in testEnvironment, and pre-production function not called', () => {
+        it('should LOG when LoggaBat in testEnvironment, and pre-production function not called', () => {
 
-            const resultWithWarn = loggaInitialisedWithTestMode.warn(WARNING);
-            const resultWithInfo = loggaInitialisedWithTestMode.info(INFO);
-            const resultWithLog = loggaInitialisedWithTestMode.log(LOG);
-            const resultWithError = loggaInitialisedWithTestMode.error(ERROR);
+            const resultWithWarn = loggabatInitialisedWithTestMode.warn(WARNING);
+            const resultWithInfo = loggabatInitialisedWithTestMode.info(INFO);
+            const resultWithLog = loggabatInitialisedWithTestMode.log(LOG);
+            const resultWithError = loggabatInitialisedWithTestMode.error(ERROR);
 
             expect(resultWithWarn.logged).to.equal(true);
-            expect(resultWithWarn.type).to.equal(LoggaType.WARN);
+            expect(resultWithWarn.type).to.equal(LoggaBatType.WARN);
 
             expect(resultWithInfo.logged).to.equal(true);
-            expect(resultWithInfo.type).to.equal(LoggaType.INFO);
+            expect(resultWithInfo.type).to.equal(LoggaBatType.INFO);
 
             expect(resultWithLog.logged).to.equal(true);
-            expect(resultWithLog.type).to.equal(LoggaType.LOG);
+            expect(resultWithLog.type).to.equal(LoggaBatType.LOG);
 
             expect(resultWithError.logged).to.equal(true);
-            expect(resultWithError.type).to.equal(LoggaType.ERROR);
+            expect(resultWithError.type).to.equal(LoggaBatType.ERROR);
 
         });
 
-        it('should NOT LOG when Logga in productionEnvironment, and pre-production function not called', () => {
+        it('should NOT LOG when LoggaBat in productionEnvironment, and pre-production function not called', () => {
 
-            const resultWithWarn = loggaInitialisedWithProductionMode.warn(WARNING);
-            const resultWithInfo = loggaInitialisedWithProductionMode.info(INFO);
-            const resultWithLog = loggaInitialisedWithProductionMode.log(LOG);
-            const resultWithError = loggaInitialisedWithProductionMode.error(ERROR);
+            const resultWithWarn = loggabatInitialisedWithProductionMode.warn(WARNING);
+            const resultWithInfo = loggabatInitialisedWithProductionMode.info(INFO);
+            const resultWithLog = loggabatInitialisedWithProductionMode.log(LOG);
+            const resultWithError = loggabatInitialisedWithProductionMode.error(ERROR);
 
             expect(resultWithWarn.logged).to.equal(false);
-            expect(resultWithWarn.type).to.equal(LoggaType.WARN);
+            expect(resultWithWarn.type).to.equal(LoggaBatType.WARN);
 
             expect(resultWithInfo.logged).to.equal(false);
-            expect(resultWithInfo.type).to.equal(LoggaType.INFO);
+            expect(resultWithInfo.type).to.equal(LoggaBatType.INFO);
 
             expect(resultWithLog.logged).to.equal(false);
-            expect(resultWithLog.type).to.equal(LoggaType.LOG);
+            expect(resultWithLog.type).to.equal(LoggaBatType.LOG);
 
             expect(resultWithError.logged).to.equal(false);
-            expect(resultWithError.type).to.equal(LoggaType.ERROR);
+            expect(resultWithError.type).to.equal(LoggaBatType.ERROR);
 
         });
 
-        it('should NOT LOG when Logga in productionEnvironment, and pre-production function called', () => {
+        it('should NOT LOG when LoggaBat in productionEnvironment, and pre-production function called', () => {
 
-            const resultWithWarn = loggaInitialisedWithProductionMode.prod().warn(WARNING);
-            const resultWithInfo = loggaInitialisedWithProductionMode.prod().info(INFO);
-            const resultWithLog = loggaInitialisedWithProductionMode.prod().log(LOG);
-            const resultWithError = loggaInitialisedWithProductionMode.prod().error(ERROR);
+            const resultWithWarn = loggabatInitialisedWithProductionMode.prod().warn(WARNING);
+            const resultWithInfo = loggabatInitialisedWithProductionMode.prod().info(INFO);
+            const resultWithLog = loggabatInitialisedWithProductionMode.prod().log(LOG);
+            const resultWithError = loggabatInitialisedWithProductionMode.prod().error(ERROR);
 
             expect(resultWithWarn.logged).to.equal(true);
-            expect(resultWithWarn.type).to.equal(LoggaType.WARN);
+            expect(resultWithWarn.type).to.equal(LoggaBatType.WARN);
 
             expect(resultWithInfo.logged).to.equal(true);
-            expect(resultWithInfo.type).to.equal(LoggaType.INFO);
+            expect(resultWithInfo.type).to.equal(LoggaBatType.INFO);
 
             expect(resultWithLog.logged).to.equal(true);
-            expect(resultWithLog.type).to.equal(LoggaType.LOG);
+            expect(resultWithLog.type).to.equal(LoggaBatType.LOG);
 
             expect(resultWithError.logged).to.equal(true);
-            expect(resultWithError.type).to.equal(LoggaType.ERROR);
+            expect(resultWithError.type).to.equal(LoggaBatType.ERROR);
 
         });
 
         it('should LOG in a combined and dynamic environment', () => {
 
-            const resultWithWarn = logga.prod().warn(WARNING);
+            const resultWithWarn = loggabat.prod().warn(WARNING);
 
-            logga.setProductionEnvironment();
-            const resultWithInfo = logga.prod().info(INFO);
+            loggabat.setProductionEnvironment();
+            const resultWithInfo = loggabat.prod().info(INFO);
 
-            logga.setTestEnvironment();
-            const resultWithError = logga.error(ERROR);
+            loggabat.setTestEnvironment();
+            const resultWithError = loggabat.error(ERROR);
 
 
             expect(resultWithWarn.logged).to.equal(true);
-            expect(resultWithWarn.type).to.equal(LoggaType.WARN);
+            expect(resultWithWarn.type).to.equal(LoggaBatType.WARN);
 
             expect(resultWithInfo.logged).to.equal(true);
-            expect(resultWithInfo.type).to.equal(LoggaType.INFO);
+            expect(resultWithInfo.type).to.equal(LoggaBatType.INFO);
 
             expect(resultWithError.logged).to.equal(true);
-            expect(resultWithError.type).to.equal(LoggaType.ERROR);
+            expect(resultWithError.type).to.equal(LoggaBatType.ERROR);
         });
 	
 		it ( 'should LOG with a prefix set to it' , () => {
 			
-			loggaInitialisedWithStringPrefix.warn(WARNING);
-			loggaInitialisedWithNumberPrefix.info(INFO);
+			loggabatInitialisedWithStringPrefix.warn(WARNING);
+			loggabatInitialisedWithNumberPrefix.info(INFO);
 			
-			expect(loggaInitialisedWithStringPrefix.getHistory()).to.have.length(1);
-			expect(loggaInitialisedWithNumberPrefix.getHistory()).to.have.length(1);
+			expect(loggabatInitialisedWithStringPrefix.getHistory()).to.have.length(1);
+			expect(loggabatInitialisedWithNumberPrefix.getHistory()).to.have.length(1);
 			
 		} )
     
@@ -223,16 +223,16 @@ describe("Logga", () => {
             const firstMessage = "Bambi";
             const secondMessage = "Migdalia";
 
-            let history = logga.getHistory();
+            let history = loggabat.getHistory();
             expect(history).to.be.an('array');
 
-            logga.log(firstMessage);
-            history = logga.getHistory();
+            loggabat.log(firstMessage);
+            history = loggabat.getHistory();
             expect(history).to.have.length(1);
             expect(history).to.contain(firstMessage);
 
-            logga.log(secondMessage);
-            history = logga.getHistory();
+            loggabat.log(secondMessage);
+            history = loggabat.getHistory();
             expect(history).to.have.length(2);
             expect(history).to.contain(secondMessage);
 
@@ -242,22 +242,22 @@ describe("Logga", () => {
 
     describe("#resetHistory", () => {
 
-        it('should clear previously stored data (or History) from the Logga Instance', () => {
+        it('should clear previously stored data (or History) from the LoggaBat Instance', () => {
 
             const firstMessage = "Bambi";
             const secondMessage = "Migdalia";
 
-            let history = logga.getHistory();
+            let history = loggabat.getHistory();
             expect(history).to.be.an('array');
             expect(history).to.have.length(0);
 
 
-            logga.log(firstMessage);
-            history = logga.getHistory();
+            loggabat.log(firstMessage);
+            history = loggabat.getHistory();
             expect(history).to.have.length(1);
 
-            logga.resetHistory();
-            history = logga.getHistory();
+            loggabat.resetHistory();
+            history = loggabat.getHistory();
             expect(history).to.have.length(0);
 
         })

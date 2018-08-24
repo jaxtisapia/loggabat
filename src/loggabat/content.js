@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-const LoggahType = require('./type');
+const LoggaBatType = require('./type');
 
 /**
  * Standard Model for all logged items
@@ -7,13 +7,14 @@ const LoggahType = require('./type');
 class LoggedContent {
   /**
    * @constructor
-   * @param {LoggahType} type - category of the logged item. Example, info, error, warn
+   * @param {LoggaBatType} type - category of the logged item. Example, info, error, warn
    * @param {any} message - logged message
-   * @param {boolean} logged - status of a Logga. Either it was logged, or was not;
-   * depending on Logga being in production environment, and the `message` being production-friendly
+   * @param {boolean} logged - status of a LoggaBat. Either it was logged, or was not;
+   * depending on LoggaBat being in production environment,
+   * and the `message` being production-friendly
    */
   constructor({ type, message, logged }) {
-    this.type = (Object.values(LoggahType).includes(type)) ? type : LoggahType.LOG;
+    this.type = (Object.values(LoggaBatType).includes(type)) ? type : LoggaBatType.LOG;
     this.message = (message) || null;
     this.logged = (typeof logged === 'boolean') ? logged : false;
   }

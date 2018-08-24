@@ -1,5 +1,5 @@
 {
-  "name": "loggah",
+  "name": "loggabat",
   "version": "1.0.0",
   "description": "Special Logger for filtering logs you need in production, and logs you need in test mode only",
   "main": "./lib/index.js",
@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jaxtisapia/logga.git"
+    "url": "git+https://github.com/jaxtisapia/loggabat.git"
   },
   "keywords": [
     "log",
@@ -35,9 +35,9 @@
   "author": "Justice Appiah <jaxtis.apia@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jaxtisapia/logga.git/issues"
+    "url": "https://github.com/jaxtisapia/loggabat.git/issues"
   },
-  "homepage": "https://github.com/jaxtisapia/logga.git#readme",
+  "homepage": "https://github.com/jaxtisapia/loggabat.git#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.1",

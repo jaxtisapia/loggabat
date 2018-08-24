@@ -1,13 +1,13 @@
 /* eslint-disable no-underscore-dangle,no-console */
-const LoggaHistory = require('./history');
+const LoggahHistory = require('./history');
 const LoggedContent = require('./content');
-const LoggaType = require('./type');
+const LoggahType = require('./type');
 
 /**
  * Special Logger for filtering logs you need in production, and logs you need in test mode only
  *
- * @property {boolean} _productionMode - state of Logga. Either in production mode or test mode
- * @property {LoggaHistory} _history - an array of all logs successfully ran
+ * @property {boolean} _productionMode - state of LoggaBat. Either in production mode or test mode
+ * @property {LoggahHistory} _history - an array of all logs successfully ran
  *
  * @property {boolean} _nextMessageTestType - determines the message type of next item to be logged.
  * Either a production-friendly log, or a non-important test-environment message
@@ -17,24 +17,24 @@ const LoggaType = require('./type');
  * @author Justice Appiah <jaxtis.apia@gmail.com>
  * @version 1.0.0
  */
-class Logga {
+class LoggaBat {
   /**
-   * Create a Logga
+   * Create a LoggaBat
    * @constructor
    *
    * @example
-   * const logger = new Logger({ productionMode: true, prefix:"MY-APP-NAMESPACE"})
+   * const logger = new LoggaBat({ productionMode: true, prefix:"MY-APP-NAMESPACE"})
    *
-   * @param { boolean } productionMode - Determine behaviour of Logga with respect to production,
+   * @param { boolean } productionMode - Determine behaviour of LoggaBat with respect to production,
    * some logs are hidden in production mode. When not specified, defaults to false
    * @param {any} prefix - Value to be prepended to all logs
    *
-   * @return {Logga} an instance of the Logga
+   * @return {LoggaBat} an instance of the LoggaBat
    */
   constructor({ productionMode, prefix }) {
     this.setPrefix(prefix);
     this._productionMode = (typeof productionMode === 'boolean') ? productionMode : false;
-    this._history = new LoggaHistory();
+    this._history = new LoggahHistory();
     this._nextMessageTestType = true;
   }
 
@@ -58,14 +58,14 @@ class Logga {
     const isTestModeMessage = this._nextMessageTestType;
 
     // reset the _nextMessageTestType and release neutrality
-    // and independence of futher logga actions
+    // and independence of futher loggah actions
     this._resetNextMessageType();
 
     return { message, isTestModeMessage };
   }
 
   /**
-   * Return prefix value assigned to a Logga instance
+   * Return prefix value assigned to a LoggaBat instance
    * @return {any|*}
    */
   prefix() {
@@ -76,8 +76,8 @@ class Logga {
    * Set a value to prepend to all logs
    *
    * @example
-   * const logga = new Logga({});
-   * logga.setPrefix("My Heroku App");
+   * const loggah = new LoggaBat({});
+   * loggah.setPrefix("My Heroku App");
    *
    * @param { string | number } value - value to be prepended to all logs
    */
@@ -102,20 +102,20 @@ class Logga {
    *
    * @return {LoggedContent} Details of log action
    */
-  _log(loggerFunction, { message, isTestModeMessage }, type = LoggaType.INFO) {
+  _log(loggerFunction, { message, isTestModeMessage }, type = LoggahType.INFO) {
     let contentMessage = message;
 
     const loggedContent = new LoggedContent({ logged: false, message: contentMessage, type });
-    const loggaHistory = this._history;
+    const loggahHistory = this._history;
 
-    // Filters all relevant log actions according to 'productionMode' of Logga Instance
+    // Filters all relevant log actions according to 'productionMode' of LoggaBat Instance
     if (isTestModeMessage && this.productionMode()) return loggedContent;
 
     // Hooray!!! You made it to this space
     // At this point, all log functions are RAN SUCCESSFULLY
     if (this.isPrefixSet()) contentMessage = this._prependPrefixToMessage(contentMessage);
 
-    loggaHistory.push(contentMessage);
+    loggahHistory.push(contentMessage);
     loggerFunction(contentMessage);
     loggedContent.setSuccessful();
 
@@ -123,7 +123,7 @@ class Logga {
   }
 
   /**
-   * Return <b>True</b> when prefix is set for a Logga, or <b>False</b> when no prefix is set
+   * Return <b>True</b> when prefix is set for a LoggaBat, or <b>False</b> when no prefix is set
    * @return {boolean}
    */
   isPrefixSet() {
@@ -132,7 +132,7 @@ class Logga {
   }
 
   /**
-   * Prepend prefix message to a message to be Logga'd
+   * Prepend prefix message to a message to be LoggaBat'd
    * @private
    *
    * @see setPrefix
@@ -148,10 +148,10 @@ class Logga {
   }
 
   /**
-   * Prepares next message to be Logga'd as a production-friendly one
+   * Prepares next message to be LoggaBat'd as a production-friendly one
    *
    * @see prod
-   * @return {Logga} Self item for further manipulations
+   * @return {LoggaBat} Self item for further manipulations
    */
   production() {
     this._nextMessageTestType = false;
@@ -161,7 +161,7 @@ class Logga {
   /**
    * Same as  {@link production}
    * @see production
-   * @return {Logga}
+   * @return {LoggaBat}
    */
   prod() {
     return this.production();
@@ -171,8 +171,8 @@ class Logga {
    * Set mode into a production-ready environment
    *
    * @example
-   * const logga = new Logga({}); // Logga is in test mode
-   * logga.setProductionEnvironment(); // Logga is in production mode
+   * const loggah = new LoggaBat({}); // LoggaBat is in test mode
+   * loggah.setProductionEnvironment(); // LoggaBat is in production mode
    *
    * @see setTestEnvironment
    *
@@ -186,8 +186,8 @@ class Logga {
    * Set mode into a test environment
    *
    * @example
-   * const logga = new Logga({productionMode: true}); // Logga is in production mode
-   * logga.setProductionEnvironment(); // Logga is in test mode
+   * const loggah = new LoggaBat({productionMode: true}); // LoggaBat is in production mode
+   * loggah.setProductionEnvironment(); // LoggaBat is in test mode
    *
    * @see setProductionEnvironment
    *
@@ -198,18 +198,18 @@ class Logga {
   }
 
   /**
-   * Get production environment Logga is curently operating in.
+   * Get production environment LoggaBat is curently operating in.
    * <b>True</b> when in production mode,
    * <b>False</b> when in test mode
    *
-   * @return {boolean} true when Logga is production-ready or in test mode
+   * @return {boolean} true when LoggaBat is production-ready or in test mode
    */
   productionMode() {
     return this._productionMode;
   }
 
   /**
-   * Clear all previously saved logs from Logga's history
+   * Clear all previously saved logs from LoggaBat's history
    *
    * @return {void}
    */
@@ -218,7 +218,7 @@ class Logga {
   }
 
   /**
-   * Return an array of all logs a Logga has ran successfully
+   * Return an array of all logs a LoggaBat has ran successfully
    *
    * @return {Array}
    */
@@ -234,7 +234,7 @@ class Logga {
   log(message) {
     const logger = console.log;
     const content = this._createLoggerContent(message);
-    return this._log(logger, content, LoggaType.LOG);
+    return this._log(logger, content, LoggahType.LOG);
   }
 
   /**
@@ -245,7 +245,7 @@ class Logga {
   info(message) {
     const logger = console.info;
     const content = this._createLoggerContent(message);
-    return this._log(logger, content, LoggaType.INFO);
+    return this._log(logger, content, LoggahType.INFO);
   }
 
   /**
@@ -256,7 +256,7 @@ class Logga {
   warn(message) {
     const logger = console.warn;
     const content = this._createLoggerContent(message);
-    return this._log(logger, content, LoggaType.WARN);
+    return this._log(logger, content, LoggahType.WARN);
   }
 
   /**
@@ -267,8 +267,8 @@ class Logga {
   error(message) {
     const logger = console.error;
     const content = this._createLoggerContent(message);
-    return this._log(logger, content, LoggaType.ERROR);
+    return this._log(logger, content, LoggahType.ERROR);
   }
 }
 
-module.exports = Logga;
+module.exports = LoggaBat;
