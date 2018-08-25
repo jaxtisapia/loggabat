@@ -6,15 +6,39 @@ const LoggaBatType = require('../src/loggabat/type');
 
 describe("LoggaBat", () => {
 
+    /**
+     * @type {LoggaBat}
+     */
     let loggabat;
 
+    /**
+     * @type {LoggaBat}
+     */
     let loggabatInitialisedWithProductionMode;
+    /**
+     * @type {LoggaBat}
+     */
     let loggabatInitialisedWithTestMode;
+    /**
+     * @type {LoggaBat}
+     */
     let loggabatInitialisedWithStringPrefix;
+    /**
+     * @type {LoggaBat}
+     */
     let loggabatInitialisedWithNumberPrefix;
 
+    /**
+     * @type {LoggaBat}
+     */
     let loggabatInitialisedWithString;
+    /**
+     * @type {LoggaBat}
+     */
     let loggabatInitialisedWithNumber;
+    /**
+     * @type {LoggaBat}
+     */
     let loggabatInitialisedWithFunction;
 
     const MY_APP_PREFIX_STRING = "This is my new app:";
@@ -76,6 +100,18 @@ describe("LoggaBat", () => {
         })
 
     });
+
+    describe("#p", () => {
+        it('should set production mode to true',  () =>{
+            const initialProductionMode = loggabat.p().productionMode();
+
+            loggabat.setProductionEnvironment();
+            const finalProductionMode = loggabat.p().productionMode();
+
+            expect(initialProductionMode).to.equal(false);
+            expect(finalProductionMode).to.equal(true);
+        })
+    })
 
     describe("#setTestEnvironment", () => {
 
