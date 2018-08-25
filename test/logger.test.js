@@ -113,6 +113,31 @@ describe("LoggaBat", () => {
         })
     })
 
+    describe("#prod", () => {
+        it('should set production mode to true',  () =>{
+            const initialProductionMode = loggabat.prod().productionMode();
+
+            loggabat.setProductionEnvironment();
+            const finalProductionMode = loggabat.prod().productionMode();
+
+            expect(initialProductionMode).to.equal(false);
+            expect(finalProductionMode).to.equal(true);
+        })
+    })
+
+    describe("#production", () => {
+        it('should set production mode to true',  () =>{
+            const initialProductionMode = loggabat.production().productionMode();
+
+            loggabat.setProductionEnvironment();
+            const finalProductionMode = loggabat.production().productionMode();
+
+            expect(initialProductionMode).to.equal(false);
+            expect(finalProductionMode).to.equal(true);
+        })
+    })
+
+
     describe("#setTestEnvironment", () => {
 
         it('#setTestEnvironemnt should set production mode to true', () => {
