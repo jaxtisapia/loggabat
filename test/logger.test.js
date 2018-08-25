@@ -79,7 +79,7 @@ describe("LoggaBat", () => {
 
     describe("#setTestEnvironment", () => {
 
-        it('#setTestEnvironemnt should set production mode to true', () => {
+        it('should set production mode to false', () => {
 
             const initialProductionMode = loggabatInitialisedWithProductionMode.productionMode();
 
