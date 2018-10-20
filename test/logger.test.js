@@ -77,8 +77,8 @@ describe("LoggaBat", () => {
 
     });
 
-    describe("#p", () => {
-        it('should set production mode to true',  () =>{
+    describe("#p, #prod, #production", () => {
+        it('#p should set production mode to true',  () =>{
             const initialProductionMode = loggabat.p().productionMode();
 
             loggabat.setProductionEnvironment();
@@ -87,10 +87,8 @@ describe("LoggaBat", () => {
             expect(initialProductionMode).to.equal(false);
             expect(finalProductionMode).to.equal(true);
         })
-    })
 
-    describe("#prod", () => {
-        it('should set production mode to true',  () =>{
+        it('#prop should set production mode to true',  () =>{
             const initialProductionMode = loggabat.prod().productionMode();
 
             loggabat.setProductionEnvironment();
@@ -99,10 +97,8 @@ describe("LoggaBat", () => {
             expect(initialProductionMode).to.equal(false);
             expect(finalProductionMode).to.equal(true);
         })
-    })
 
-    describe("#production", () => {
-        it('should set production mode to true',  () =>{
+        it('#production should set production mode to true',  () =>{
             const initialProductionMode = loggabat.production().productionMode();
 
             loggabat.setProductionEnvironment();
@@ -113,10 +109,9 @@ describe("LoggaBat", () => {
         })
     })
 
-
     describe("#setTestEnvironment", () => {
 
-        it('#setTestEnvironemnt should set production mode to true', () => {
+        it('#setTestEnvironment should set production mode to true', () => {
 
             const initialProductionMode = loggabatInitialisedWithProductionMode.productionMode();
 
