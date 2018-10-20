@@ -6,39 +6,15 @@ const LoggaBatType = require('../src/loggabat/type');
 
 describe("LoggaBat", () => {
 
-    /**
-     * @type {LoggaBat}
-     */
     let loggabat;
 
-    /**
-     * @type {LoggaBat}
-     */
     let loggabatInitialisedWithProductionMode;
-    /**
-     * @type {LoggaBat}
-     */
     let loggabatInitialisedWithTestMode;
-    /**
-     * @type {LoggaBat}
-     */
     let loggabatInitialisedWithStringPrefix;
-    /**
-     * @type {LoggaBat}
-     */
     let loggabatInitialisedWithNumberPrefix;
 
-    /**
-     * @type {LoggaBat}
-     */
     let loggabatInitialisedWithString;
-    /**
-     * @type {LoggaBat}
-     */
     let loggabatInitialisedWithNumber;
-    /**
-     * @type {LoggaBat}
-     */
     let loggabatInitialisedWithFunction;
 
     const MY_APP_PREFIX_STRING = "This is my new app:";
