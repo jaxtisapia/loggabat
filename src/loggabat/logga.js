@@ -25,8 +25,10 @@ class LoggaBat {
    * @example
    * const logger = new LoggaBat({ productionMode: true, prefix:"MY-APP-NAMESPACE"})
    *
-   * @param { boolean } productionMode - Determine behaviour of LoggaBat with respect to production,
-   * some logs are hidden in production mode. When not specified, defaults to false
+   * @param { boolean } productionMode - Determines behaviour of LoggaBat with
+   * respect to production. Some logs are hidden in production mode.
+   * When not specified, defaults to false.
+   * Passing a non boolean also defaults to false.
    * @param {any} prefix - Value to be prepended to all logs
    *
    * @return {LoggaBat} an instance of the LoggaBat
@@ -164,6 +166,15 @@ class LoggaBat {
    * @return {LoggaBat}
    */
   prod() {
+    return this.production();
+  }
+
+  /**
+   * Same as  {@link production}
+   * @see production
+   * @return {LoggaBat}
+   */
+  p() {
     return this.production();
   }
 
