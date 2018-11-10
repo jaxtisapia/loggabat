@@ -1,8 +1,6 @@
 # Loggabat
 
-[![Coverage Status](https://coveralls.io/repos/github/jaxtisapia/loggabat/badge.svg?branch=master)](https://coveralls.io/github/jaxtisapia/loggabat?branch=master)
-
-[![Build Status](https://travis-ci.org/jaxtisapia/loggabat.svg?branch=master)](https://travis-ci.org/jaxtisapia/loggabat)
+[![Coverage Status](https://coveralls.io/repos/github/jaxtisapia/loggabat/badge.svg?branch=master)](https://coveralls.io/github/jaxtisapia/loggabat?branch=master) [![Build Status](https://travis-ci.org/jaxtisapia/loggabat.svg?branch=master)](https://travis-ci.org/jaxtisapia/loggabat)
 
 Special Logger for filtering logs you need in production, and logs you need in test mode only.
 
