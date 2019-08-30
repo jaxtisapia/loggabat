@@ -72,4 +72,16 @@ describe("LoggaBatHistory", () => {
         })
     });
 
+    describe('#setLimit', function () {
+      it('should set default limit to CONFIG_DEFAULT_LIMIT value');
+      it('should throw error when setting limit less than 1');
+      it('should throw error when setting limit which is not a number');
+      it('should be able to set limit greater than 1');
+    });
+
+    describe('#getLimit', function () {
+      it('should return CONFIG_DEFAULT_LIMIT when no limit is set');
+      it('should return a number-value that corresponds to history limit');
+    });
+
 });

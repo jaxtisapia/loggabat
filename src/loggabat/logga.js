@@ -239,7 +239,7 @@ class LoggaBat {
 
   /**
    * Console.log a message to the console
-   * @param {any} message
+   * @param {string | number} message
    * @return {LoggedContent}
    */
   log(message) {
@@ -250,7 +250,7 @@ class LoggaBat {
 
   /**
    * Console.info a message to the console
-   * @param {any} message
+   * @param {string | number} message
    * @return {LoggedContent}
    */
   info(message) {
@@ -261,7 +261,7 @@ class LoggaBat {
 
   /**
    * Console.warn a message to the console
-   * @param {any} message
+   * @param {string | number} message
    * @return {LoggedContent}
    */
   warn(message) {
@@ -272,7 +272,7 @@ class LoggaBat {
 
   /**
    *  Console.error a message to the console
-   * @param {any} message
+   * @param {string | number} message
    * @return {LoggedContent}
    */
   error(message) {
