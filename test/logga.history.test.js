@@ -1,7 +1,9 @@
 const {expect} = require("chai");
 const {describe} = require("mocha");
+const config = require("../src/config");
 
 const LoggaBatHistory = require("../src/loggabat/history");
+const LoggaBat = require("../src");
 
 describe("LoggaBatHistory", () => {
 
@@ -73,15 +75,70 @@ describe("LoggaBatHistory", () => {
     });
 
     describe('#setLimit', function () {
-      it('should set default limit to CONFIG_DEFAULT_LIMIT value');
-      it('should throw error when setting limit less than 1');
-      it('should throw error when setting limit which is not a number');
-      it('should be able to set limit greater than 1');
+      it('should set default limit to DEFAULT_HISTORY_LIMIT value', () => {
+        const initialLimit = loggabatHistory.getLimit();
+        expect(initialLimit).to.equal(config.DEFAULT_HISTORY_LIMIT);
+
+        const anotherLimit = loggabatHistoryInitiatedWithUnnecessaryArgument.getLimit();
+        expect(anotherLimit).to.equal(config.DEFAULT_HISTORY_LIMIT);
+      });
+
+      it('should throw error when setting limit less than HISTORY_LOWER_THRESHOLD', () => {
+        expect(() => loggabatHistory.setLimit(0)).to.throw();
+        expect(() => loggabatHistory.setLimit(-0)).to.throw();
+        expect(() => loggabatHistory.setLimit(-1)).to.throw();
+        expect(() => loggabatHistory.setLimit(-22)).to.throw();
+        expect(() => loggabatHistory.setLimit(-300)).to.throw();
+        expect(() => loggabatHistory.setLimit(-4000)).to.throw();
+      });
+
+      it('should throw error when setting limit which is not a number', () => {
+        expect(() => loggabatHistory.setLimit("")).to.throw();
+        expect(() => loggabatHistory.setLimit(" ")).to.throw();
+        expect(() => loggabatHistory.setLimit("a")).to.throw();
+        expect(() => loggabatHistory.setLimit("some string")).to.throw();
+      });
+
+      it('should be able to set limit greater than HISTORY_LOWER_THRESHOLD', () => {
+        expect(() => loggabatHistory.setLimit(config.HISTORY_LOWER_THRESHOLD)).to.not.throw();
+        expect(() => loggabatHistory.setLimit(12)).to.not.throw();
+        expect(() => loggabatHistory.setLimit(23423)).to.not.throw();
+        expect(() => loggabatHistory.setLimit(99999999999999999999999999999999)).to.not.throw();
+      });
+
+      it('should hold log histories capped at the limit value', () => {
+        const expectedNumberOfLogsInHistory = 600;
+
+        const loggabat = new LoggaBat({ productionMode: false });
+        loggabat.setHistoryQueue(loggabatHistory);
+
+        loggabatHistory.setLimit(expectedNumberOfLogsInHistory);
+
+        // To test our history object can hold maximum value 'expectedNumberOfLogsInHistory',
+        // we stress-test it with multiple the maximum value
+        // We then check if it actually held the maximum value
+        const actualNumberOfLogs = expectedNumberOfLogsInHistory * 2;
+
+        for (let index = 0; index < actualNumberOfLogs; index++) {
+          loggabat.warn(index);
+        }
+
+        const historyOfLogs = loggabat.getHistory();
+
+        expect(historyOfLogs.length).to.not.equal(actualNumberOfLogs);
+        expect(historyOfLogs.length).to.equal(expectedNumberOfLogsInHistory);
+      });
     });
 
     describe('#getLimit', function () {
-      it('should return CONFIG_DEFAULT_LIMIT when no limit is set');
-      it('should return a number-value that corresponds to history limit');
+      it('should return DEFAULT_HISTORY_LIMIT when no limit is set', () => {
+        expect(loggabatHistory.getLimit()).to.equal(config.DEFAULT_HISTORY_LIMIT);
+      });
+
+      it('should return a number-value that corresponds to history limit', () => {
+        loggabatHistory.setLimit(55);
+        expect(loggabatHistory.getLimit()).to.equal(55)
+      });
     });
 
 });
