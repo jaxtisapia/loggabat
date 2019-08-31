@@ -220,6 +220,13 @@ class LoggaBat {
   }
 
   /**
+   * @param {LoggaBatHistory} historyQueue
+   */
+  setHistoryQueue(historyQueue) {
+    this._history = historyQueue;
+  }
+
+  /**
    * Clear all previously saved logs from LoggaBat's history
    *
    * @return {void}
